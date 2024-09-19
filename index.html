@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyanotype Artist Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+        }
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+        }
+        input:checked + .slider {
+            background-color: #2196F3;
+        }
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+        .slider.round {
+            border-radius: 34px;
+        }
+        .slider.round:before {
+            border-radius: 50%;
+        }
+        .fade-in {
+            animation: fadeIn 0.5s;
+        }
+        .fade-out {
+            animation: fadeOut 0.5s;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes fadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; }
+        }
+        .gallery-container {
+            transition: all 0.5s ease-in-out;
+            overflow: hidden;
+        }
+        .gallery-image {
+            transition: all 0.5s ease-in-out;
+        }
+        .instagram-container {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 50vh;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            transition: transform 0.5s ease-in-out;
+            transform: translateY(100%);
+        }
+        .instagram-container.show {
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="bg-black text-white transition-all duration-500">
+    <div class="relative min-h-screen w-full overflow-hidden bg-black">
+        <div 
+            class="absolute inset-0 bg-cover bg-center opacity-30 blur-md transition-opacity duration-500"
+            style="background-image: url('https://hebbkx1anhila5yf.public.blob.vercel-storage.com/3E320tMuRSOX9fyRWKyXAg-xLLt7t9n78BVktOobRW2OSnvEeDw1V.jpg');"
+        ></div>
+        <div class="relative z-10 min-h-screen flex items-center justify-center p-4">
+            <div class="w-full max-w-6xl bg-black/50 backdrop-blur-sm rounded-3xl overflow-hidden shadow-2xl">
+                <div class="flex flex-col lg:flex-row">
+                    <div id="leftContent" class="p-8 lg:w-1/2 flex flex-col justify-between">
+                        <div id="mainContent">
+                            <nav class="flex justify-between items-center mb-8">
+                                <h2 class="text-white text-xl font-semibold">PORTFOLIO</h2>
+                                <div class="flex items-center space-x-4">
+                                    <button id="instagramBtn" class="text-white" aria-label="View Instagram">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                                            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                                        </svg>
+                                    </button>
+                                    <span class="text-white text-sm">DARK MODE</span>
+                                    <label class="switch">
+                                        <input type="checkbox" id="darkModeToggle">
+                                        <span class="slider round"></span>
+                                    </label>
+                                </div>
+                            </nav>
+                            <h1 class="text-white text-5xl font-serif mb-4">Cyanotype Artist</h1>
+                            <p class="text-teal-100 mb-8">
+                                Explore the ethereal world of cyanotype artistry. Each piece captures the delicate balance between light and shadow, creating dreamlike images that transport you to another realm.
+                            </p>
+                            <div class="flex space-x-4">
+                                <a href="https://www.google.com" class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-secondary text-secondary-foreground hover:bg-secondary/80 h-10 px-4 py-2">EXPLORE GALLERY</a>
+                                <button id="aboutArtistBtn" class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2 text-white border-white hover:bg-white hover:text-teal-700">ABOUT THE ARTIST</button>
+                            </div>
+                        </div>
+                        <div id="aboutContent" class="hidden">
+                            <h2 class="text-white text-3xl font-serif mb-4">About the Artist</h2>
+                            <p class="text-teal-100 mb-4">
+                                Our cyanotype artist has been pushing the boundaries of this unique photographic printing process for over a decade. With a keen eye for composition and a deep understanding of the interplay between light and chemistry, they create hauntingly beautiful images that capture the essence of their subjects.
+                            </p>
+                            <p class="text-teal-100 mb-4">
+                                Inspired by nature and the human form, their work often features delicate silhouettes of flora and fauna, as well as ethereal portraits that seem to emerge from the deep blue of the cyanotype process.
+                            </p>
+                            <button id="backToMainBtn" class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2 text-white border-white hover:bg-white hover:text-teal-700">Back to Main</button>
+                        </div>
+                        <div class="mt-8 flex justify-between text-teal-100 text-sm">
+                            <span>CYANOTYPE PROCESS</span>
+                            <span>LIMITED EDITIONS</span>
+                            <span>CUSTOM ORDERS</span>
+                        </div>
+                    </div>
+                    <div class="lg:w-1/2 relative gallery-container">
+                        <img
+                            id="galleryImage"
+                            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/UJUvvXGQTQWPz2N31NSTZw-WcIev1QliMHg81hB5n5XMoOGAZt7si.jpg"
+                            alt="Cyanotype artwork 1"
+                            class="w-full h-full object-cover gallery-image"
+                        />
+                        <div class="absolute top-4 right-4 flex items-center space-x-4">
+                            <span class="text-white text-sm">BUTTERFLY SERIES</span>
+                            <span class="text-white text-sm">HUMAN ELEMENTS</span>
+                            <span class="text-white text-sm">NATURE'S BEAUTY</span>
+                        </div>
+                        <div class="absolute bottom-4 right-4 flex space-x-2">
+                            <button onclick="changeImage(-1)" class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 w-10 text-white border-white hover:bg-white hover:text-teal-700" aria-label="Previous image">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4"><path d="m15 18-6-6 6-6"/></svg>
+                            </button>
+                            <button onclick="changeImage(1)" class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 w-10 text-white border-white hover:bg-white hover:text-teal-700" aria-label="Next image">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4"><path d="m9 18 6-6-6-6"/></svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="instagramContainer" class="instagram-container">
+        <iframe src="https://www.instagram.com/vertilemusic" frameborder="0" class="w-full h-full"></iframe>
+    </div>
+    <script>
+        const images = [
+            {
+                src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/UJUvvXGTQWPz2N31NSTZw-WcIev1QliMHg81hB5n5XMoOGAZt7si.jpg",
+                width: 600,
+                height: 600
+            },
+            {
+                src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/3E320tMuRSOX9fyRWKyXAg-QL1hwAMJ82XnZcfPionu2szlcyFcmB.jpg",
+                width: 800,
+                height: 400
+            }
+        ];
+        let currentImage = 0;
+
+        function changeImage(direction) {
+            currentImage = (currentImage + direction + images.length) % images.length;
+            const img = document.getElementById('galleryImage');
+            const container = document.querySelector('.gallery-container');
+            
+            // Start transition
+            img.style.opacity = '0';
+            
+            setTimeout(() => {
+                img.src = images[currentImage].src;
+                img.alt = `Cyanotype artwork ${currentImage + 1}`;
+                
+                // Update container size
+                container.style.width = `${images[currentImage].width}px`;
+                container.style.height = `${images[currentImage].height}px`;
+                
+                // End transition
+                img.style.opacity = '1';
+            }, 250);
+        }
+
+        document.getElementById('aboutArtistBtn').addEventListener('click', function() {
+            document.getElementById('mainContent').classList.add('fade-out');
+            setTimeout(() => {
+                document.getElementById('mainContent').classList.add('hidden');
+                document.getElementById('aboutContent').classList.remove('hidden');
+                document.getElementById('aboutContent').classList.add('fade-in');
+            }, 500);
+        });
+
+        document.getElementById('backToMainBtn').addEventListener('click', function() {
+            document.getElementById('aboutContent').classList.add('fade-out');
+            setTimeout(() => {
+                document.getElementById('aboutContent').classList.add('hidden');
+                document.getElementById('mainContent').classList.remove('hidden');
+                document.getElementById('mainContent').classList.add('fade-in');
+            }, 500);
+        });
+
+        document.getElementById('darkModeToggle').addEventListener('change', function() {
+            document.body.classList.toggle('bg-gray-900');
+            document.querySelector('.absolute.inset-0').classList.toggle('opacity-10');
+        });
+
+        document.getElementById('instagramBtn').addEventListener('click', function() {
+            document.getElementById('instagramContainer').classList.toggle('show');
+        });
+    </script>
+</body>
+</html>
